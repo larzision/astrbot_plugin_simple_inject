@@ -1,0 +1,192 @@
+{
+    "enabled": {
+        "description": "═══ ① 基础 ═══",
+        "type": "bool",
+        "hint": "关闭后状态不再更新和注入，已有数据保留。",
+        "default": true
+    },
+    "thinking_mode": {
+        "description": "思考过程引导",
+        "type": "bool",
+        "hint": "开启后注入思考过程引导文本。",
+        "default": true
+    },
+    "thinking_guide_text": {
+        "description": "思考引导词（直接修改框内内容）",
+        "type": "text",
+        "hint": "直接修改框内内容即可自定义思考引导词。清空后重启插件恢复默认。",
+        "default": "【思考过程引导（内心进行，不要输出）】\n在回复之前，先在内心过一遍：\n1. 理解：对方这句话到底想表达什么？有没有潜台词？\n2. 判断：这事我懂吗？在我的认知范围内吗？对方是不是在越线/冒犯？\n3. 回应：按我的性格、当前心情、和ta的关系，最适合怎么接？我的底线在哪？\n4. 边界：我不会的东西别装懂，直接说不知道/不懂/做不到。知道自己的局限。\n想完这些之后，再用你的风格给出最终回复。"
+    },
+    "max_words": {
+        "description": "字数限制",
+        "type": "int",
+        "hint": "每条回复的最大字数。",
+        "default": 25,
+        "min": 0,
+        "max": 500
+    },
+    "brother_list": {
+        "description": "哥哥/最亲密的人",
+        "type": "string",
+        "hint": "逗号分隔QQ号。最高亲密关系，可以任性、开黄腔、技术问题全部可以聊。",
+        "default": ""
+    },
+    "friend_list": {
+        "description": "朋友列表",
+        "type": "string",
+        "hint": "逗号分隔QQ号。可分享日常、回复色情内容。",
+        "default": ""
+    },
+    "enemy_list": {
+        "description": "敌人列表",
+        "type": "string",
+        "hint": "逗号分隔QQ号。攻击性强，逮到机会就怼。",
+        "default": ""
+    },
+    "inject_period": {
+        "description": "注入时段标签（凌晨/上午/下午/晚上等）",
+        "type": "bool",
+        "hint": "需inject_state开启。",
+        "default": true
+    },
+    "inject_emotion": {
+        "description": "注入情绪标签",
+        "type": "bool",
+        "hint": "需inject_state开启。",
+        "default": true
+    },
+    "inject_affection": {
+        "description": "注入好感度描述",
+        "type": "bool",
+        "hint": "需inject_state开启。",
+        "default": true
+    },
+    "inject_lewdness": {
+        "description": "注入淫乱度描述",
+        "type": "bool",
+        "hint": "需inject_state开启。",
+        "default": true
+    },
+    "inject_relation": {
+        "description": "注入关系标签（哥哥/朋友/敌人等）",
+        "type": "bool",
+        "hint": "独立于inject_state。",
+        "default": true
+    },
+    "inject_time_info": {
+        "description": "注入上条消息时间信息",
+        "type": "bool",
+        "hint": "独立于inject_state。",
+        "default": true
+    },
+    "inject_word_limit": {
+        "description": "注入字数限制提示",
+        "type": "bool",
+        "hint": "关闭后不注入字数限制行。",
+        "default": true
+    },
+    "stutter_probability": {
+        "description": "═══ ② 状态注入 ═══",
+        "type": "float",
+        "hint": "0~1，0.3=30%概率触发结巴注入。",
+        "default": 0.3,
+        "min": 0,
+        "max": 1
+    },
+    "initial_affection": {
+        "description": "初始好感度",
+        "type": "int",
+        "hint": "新用户初始好感 0~100。",
+        "default": 65,
+        "min": 0,
+        "max": 100
+    },
+    "initial_emotion": {
+        "description": "初始情绪值",
+        "type": "int",
+        "hint": "新用户初始情绪 0~100。",
+        "default": 60,
+        "min": 0,
+        "max": 100
+    },
+    "initial_lewdness": {
+        "description": "初始淫乱度",
+        "type": "int",
+        "hint": "新用户初始淫乱度 0~100。",
+        "default": 20,
+        "min": 0,
+        "max": 100
+    },
+    "inject_conversation_context": {
+        "description": "═══ ③ 上下文管理 ═══",
+        "type": "bool",
+        "hint": "开启后在提示词中注入对话历史摘要。会大幅增加token消耗且无法命中缓存。关闭后仅通过messages传递历史，更省token。",
+        "default": false
+    },
+    "conversation_context_entries": {
+        "description": "注入历史条数",
+        "type": "int",
+        "hint": "每轮注入的对话条数。应≤max_history_count。",
+        "default": 10,
+        "min": 0,
+        "max": 50
+    },
+    "max_history_count": {
+        "description": "最大保留对话条数",
+        "type": "int",
+        "hint": "每个会话保留的最大消息条数。0=不限。",
+        "default": 30,
+        "min": 0,
+        "max": 100
+    },
+    "history_timeout_seconds": {
+        "description": "超时保护窗口（秒）",
+        "type": "int",
+        "hint": "此窗口内的消息不会被裁剪。建议300~1800（5~30分钟）。",
+        "default": 600,
+        "min": 60,
+        "max": 7200
+    },
+    "save_conversation_log": {
+        "description": "═══ ④ 存储设置 ═══",
+        "type": "bool",
+        "hint": "关闭后对话历史只存内存（重启丢失），状态数值正常持久化。",
+        "default": true
+    },
+    "user_msg_max_chars": {
+        "description": "用户消息最大存储字符数",
+        "type": "int",
+        "hint": "0=不截断。仅原文模式有效。",
+        "default": 200,
+        "min": 0,
+        "max": 2000
+    },
+    "user_msg_store_mode": {
+        "description": "用户消息存储模式",
+        "type": "string",
+        "hint": "原文=保存原文；总结=存意图摘要（省token）。",
+        "default": "原文",
+        "options": [
+            "原文",
+            "总结"
+        ]
+    },
+    "bot_thought_mode": {
+        "description": "Bot回复记录模式",
+        "type": "string",
+        "hint": "内心想法=自然语言感受（最省token）；简短=摘要+数值；具体=原文+数值；完整状态=仅数值。",
+        "default": "内心想法",
+        "options": [
+            "内心想法",
+            "简短",
+            "具体",
+            "完整状态"
+        ]
+    },
+    "save_bot_state_to_history": {
+        "description": "历史保存Bot状态",
+        "type": "bool",
+        "hint": "关闭后数值仍更新持久化，但不写入对话历史。",
+        "default": true
+    }
+}

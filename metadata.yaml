@@ -1,0 +1,5 @@
+name: astrbot_plugin_simple_inject
+description: 精简版角色状态注入 - 时段/情绪/好感/关系标注，注入到系统提示
+author: miko
+version: 1.1.2
+display_name: 状态注入
